@@ -39,6 +39,9 @@ function generateEdgeCases(inputObj, maxCases = 50) {
     function generate(obj, path = []) {
         if (cases.length >= maxCases) return;
 
+        if (Array.isArray(obj)) {
+            return;
+        }
         for (const key in obj) {
             const value = obj[key];
             const fullPath = [...path, key];
@@ -83,8 +86,7 @@ function createModificationsBasedOnType(value) {
 
     if (Array.isArray(value)) {
         mods.push([]);
-        mods.push([null]);
-        mods.push(["a".repeat(1000)]);
+        return mods;
     }
 
     if (value !== null && typeof value === "object") {
