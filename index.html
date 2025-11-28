@@ -1,34 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JSON Edge Case Generator | Free Online Tool</title>
-    <meta name="description" content="Generate negative test cases, boundary values, and mutated JSON variations instantly. Free online JSON edge case generator for developers and testers.">
-
-    <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test Forge - JSON Edge Case Generator</title>
+    <meta name="description" content="Generate comprehensive edge cases and negative test cases for your JSON APIs. Free online tool for QA engineers and developers.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<div class="container">
+    <nav class="navbar">
+        <div class="nav-brand">🔧 API Test Forge</div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-btn active">Edge Case Generator</a>
+            <a href="custom.html" class="nav-btn">Custom Test Cases</a>
+            <button id="darkModeToggle" class="theme-toggle" title="Toggle Dark Mode">🌙</button>
+        </div>
+    </nav>
 
-    <h1>JSON Edge Case Generator</h1>
-    <p>Paste your JSON below and instantly generate edge cases and negative test inputs.</p>
+    <div class="container">
+        <h1>⚡ JSON Edge Case Generator</h1>
+        <p class="subtitle">Automatically generate negative test cases for your JSON APIs</p>
+        
+        <textarea id="inputJson" placeholder="Paste your JSON here..."></textarea>
 
-    <!-- AdSense block -->
-    <div class="ad-block">Your Ad Here</div>
+        <div class="input-controls">
+            <button id="prettifyBtn">🎨 Prettify</button>
+            <select id="keySelector">
+                <option value="">-- Select a Key --</option>
+            </select>
+            <button id="generateBtn">🚀 Generate Edge Cases</button>
+        </div>
 
-    <textarea id="inputJson" placeholder="Paste your JSON here"></textarea>
+        <div class="output-section">
+            <h2>Generated Test Cases</h2>
+            <div id="output-header">
+                <button id="completeTestingBtn" style="display: none;">✅ Complete Testing for This Key</button>
+                <button id="exportJsonBtn" class="export-btn" style="display: none;">📥 Export JSON</button>
+                <button id="exportCsvBtn" class="export-btn" style="display: none;">📊 Export CSV</button>
+            </div>
+            <div id="output-container">
+                <div id="output-left" class="output-column">
+                    <div class="output-content"></div>
+                </div>
+                <div id="output-right" class="output-column">
+                    <div class="output-content"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <button id="generateBtn">Generate Edge Cases</button>
-
-    <h2>Generated Edge Cases</h2>
-    <div id="output"></div>
-
-</div>
-
-<script defer src="/_vercel/insights/script.js"></script>
-<script src="script.js"></script>
-
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Built with ❤️ by API Test Forge</p>
+            <p class="footer-links">
+                <a href="https://github.com" target="_blank">⭐ GitHub</a>
+                <span class="separator">•</span>
+                <a href="https://twitter.com" target="_blank">🐦 Twitter</a>
+            </p>
+        </div>
+    </footer>
+    
+    <script defer src="/_vercel/insights/script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Test Cases - API Test Forge</title>
+    <meta name="description" content="Document and track your manual test cases with an easy-to-use interface. Free online tool for QA engineers.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="custom.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-brand">🔧 API Test Forge</div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-btn">Edge Case Generator</a>
+            <a href="custom.html" class="nav-btn active">Custom Test Cases</a>
+            <button id="darkModeToggle" class="theme-toggle" title="Toggle Dark Mode">🌙</button>
+        </div>
+    </nav>
+
+    <div class="container custom-container">
+        <h1>📝 Custom Test Cases</h1>
+        <p class="subtitle">Document your manual test scenarios with titles, descriptions, and expected vs actual behavior.</p>
+        
+        <div class="toolbar">
+            <button id="addCardBtn" class="btn-primary">➕ Add Test Case</button>
+            <button id="copyAllBtn" class="btn-secondary">📋 Copy All</button>
+            <button id="exportJsonBtn" class="btn-secondary">📥 Export JSON</button>
+            <button id="clearAllBtn" class="btn-danger">🗑️ Clear All</button>
+        </div>
+
+        <div id="cards-container">
+            <!-- Test case cards will be dynamically added here -->
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Built with ❤️ by API Test Forge</p>
+            <p class="footer-links">
+                <a href="https://github.com" target="_blank">⭐ GitHub</a>
+                <span class="separator">•</span>
+                <a href="https://twitter.com" target="_blank">🐦 Twitter</a>
+            </p>
+        </div>
+    </footer>
+    
+    <script src="custom.js"></script>
+</body>
+</html>
