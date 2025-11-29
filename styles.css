@@ -8,6 +8,17 @@ body {
     flex-direction: column;
 }
 
+/* Small site-info banner placed at top of body for quick crawlers and users */
+.site-info {
+    background: linear-gradient(90deg, #e9f7ef, #f0fbff);
+    color: #083344;
+    padding: 8px 20px;
+    text-align: center;
+    font-size: 14px;
+}
+.site-info .site-info-text a { color: #0b6fb6; font-weight: 600; text-decoration: none; }
+.site-info .site-info-text a:hover { text-decoration: underline; }
+
 /* Navbar */
 .navbar {
     display: flex;
@@ -284,6 +295,34 @@ button:hover {
     padding: 20px;
     margin-top: auto;
 }
+
+.footer .small { font-size: 12px; color: #cfcfcf; margin-top: 8px; }
+.footer a { color: #9ecbff; }
+
+/* Feedback form styles */
+.feedback-container {
+    max-width: 820px;
+    margin: 24px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+.feedback-container h2 { margin-top: 0; }
+.feedback-form .form-group { margin-bottom: 12px; }
+.feedback-input, .feedback-textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+.feedback-textarea { min-height: 160px; resize: vertical; }
+.feedback-actions { display: flex; gap: 12px; justify-content: flex-end; margin-top: 12px; }
+.feedback-actions .btn { padding: 10px 16px; border-radius: 8px; cursor: pointer; }
+.btn-primary.feedback { background: linear-gradient(135deg,#4CAF50,#45a049); color: white; border: none; }
+.btn-secondary.feedback { background: #eee; border: none; }
 
 .footer-content p {
     margin: 5px 0;

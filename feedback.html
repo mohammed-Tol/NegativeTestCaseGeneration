@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback — API Test Forge</title>
+    <meta name="description" content="Send feedback to the API Test Forge maintainer.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-brand">🔧 API Test Forge</div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-btn">Edge Case Generator</a>
+            <a href="custom.html" class="nav-btn">Custom Test Cases</a>
+            <a href="help.html" class="nav-btn">Help</a>
+            <a href="feedback.html" class="nav-btn active">Feedback</a>
+            <button id="darkModeToggle" class="theme-toggle" title="Toggle Dark Mode">🌙</button>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="feedback-container">
+            <h2>✉️ Send Feedback</h2>
+            <p class="subtitle">Report bugs, suggest features, or send general feedback. Your message will open in your email client so you can review before sending.</p>
+
+            <form id="feedbackForm" class="feedback-form" onsubmit="return sendFeedback(event);">
+                <div class="form-group">
+                    <label for="fbName">Your name (optional)</label>
+                    <input id="fbName" class="feedback-input" type="text" placeholder="Your name">
+                </div>
+
+                <div class="form-group">
+                    <label for="fbSubject">Subject</label>
+                    <input id="fbSubject" class="feedback-input" type="text" placeholder="Short summary" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="fbMessage">Message</label>
+                    <textarea id="fbMessage" class="feedback-textarea" placeholder="Describe the issue or suggestion" required></textarea>
+                </div>
+
+                <div class="feedback-actions">
+                    <button type="button" class="btn btn-secondary feedback" onclick="window.location.href='index.html'">Cancel</button>
+                    <button type="submit" class="btn btn-primary feedback">Open in Email</button>
+                </div>
+            </form>
+
+            <p style="margin-top:12px;font-size:13px;color:#666;">Or send directly: <a href="mailto:tolhabaig008@gmail.com">tolhabaig008@gmail.com</a></p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Built with ❤️ by API Test Forge</p>
+            <p class="footer-links">
+                <a href="https://github.com" target="_blank">⭐ GitHub</a>
+                <span class="separator">•</span>
+                <a href="https://twitter.com" target="_blank">🐦 Twitter</a>
+                <span class="separator">•</span>
+                <a href="feedback.html">✉️ Feedback</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+    function sendFeedback(e) {
+        e.preventDefault();
+        const to = 'tolhabaig008@gmail.com';
+        const name = document.getElementById('fbName').value.trim();
+        const subject = document.getElementById('fbSubject').value.trim();
+        const message = document.getElementById('fbMessage').value.trim();
+
+        const fullSubject = subject || 'Feedback from API Test Forge';
+        let body = '';
+        if (name) body += `Name: ${name}\n\n`;
+        body += message;
+        body += '\n\n--\nSent from API Test Forge';
+
+        const mailto = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(fullSubject)}&body=${encodeURIComponent(body)}`;
+
+        // Open user's default mail client
+        window.location.href = mailto;
+        return false;
+    }
+
+    // small dark mode init to match other pages
+    (function(){
+      const toggle = document.getElementById('darkModeToggle');
+      if(!toggle) return;
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') { document.body.classList.add('dark-mode'); toggle.textContent = '☀️'; }
+      toggle.addEventListener('click', ()=>{ document.body.classList.toggle('dark-mode'); const isDark = document.body.classList.contains('dark-mode'); toggle.textContent = isDark ? '☀️' : '🌙'; localStorage.setItem('theme', isDark ? 'dark' : 'light'); });
+    })();
+    </script>
+</body>
+</html>

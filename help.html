@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Help — API Test Forge</title>
+    <meta name="description" content="Help and examples for API Test Forge — JSON edge case generator and manual test case manager.">
+    <meta name="keywords" content="API Test Forge help, JSON edge cases, negative tests, test generator, QA tools">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="site-info" role="region" aria-label="Site summary">
+        <p class="site-info-text">API Test Forge — help center. Quick start, FAQs, and domain name suggestions.</p>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-brand">🔧 API Test Forge</div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-btn">Edge Case Generator</a>
+            <a href="custom.html" class="nav-btn">Custom Test Cases</a>
+            <a href="help.html" class="nav-btn active">Help</a>
+            <a href="feedback.html" class="nav-btn">Feedback</a>
+            <button id="darkModeToggle" class="theme-toggle" title="Toggle Dark Mode">🌙</button>
+        </div>
+    </nav>
+
+    <main class="container">
+        <h1>📘 Help & Examples</h1>
+        <p class="subtitle">How to use the Edge Case Generator and Custom Test Cases UI.</p>
+
+        <h2>Quick Start</h2>
+        <ol>
+            <li>Open <a href="index.html">Edge Case Generator</a>.</li>
+            <li>Paste a JSON payload into the textarea and click <strong>Prettify</strong> (optional).</li>
+            <li>Select a key from the <code>-- Select a Key --</code> dropdown and click <strong>Generate Edge Cases</strong>.</li>
+            <li>Copy, test, and export the generated cases as JSON or CSV.</li>
+        </ol>
+
+        <h2>Frequently Asked Questions</h2>
+        <h3>Q: Which browsers are supported?</h3>
+        <p>A: Modern browsers (Chrome, Edge, Firefox, Safari). Some features like <code>structuredClone</code> and the Clipboard API require up-to-date browsers.</p>
+
+        <h3>Q: How are edge cases generated?</h3>
+        <p>A: The generator inspects the selected key's value type and creates variants (null, empty, type-mismatch, Unicode payloads, etc.). You can export results for documentation or automated testing.</p>
+
+        <h2>Suggested Domain Names</h2>
+        <p>Short, brandable names that communicate API testing and edge cases. Consider these (availability varies):</p>
+        <ul>
+            <li><strong>apitestforge.com</strong> — direct mapping to the project name.</li>
+            <li><strong>apiedgecases.com</strong> — focused on edge cases.</li>
+            <li><strong>negativeapitests.com</strong> — explicit but longer.</li>
+            <li><strong>edgecase.dev</strong> or <strong>edgecase.tools</strong> — short and developer-oriented.</li>
+            <li><strong>apitestlab.com</strong> — general QA/testing brand.</li>
+            <li><strong>test-forge.com</strong> — shorter brandable option.</li>
+        </ul>
+        <p>Tip: prefer <strong>.com</strong> for broad recognition, <strong>.dev</strong> or <strong>.tools</strong> for technical audiences. Check availability on registrars like Namecheap, Google Domains, or GoDaddy.</p>
+
+        <h2>Contact & Contribution</h2>
+        <p>Open issues or pull requests on the project's GitHub. For quick questions, add an issue describing your use case.</p>
+
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Built with ❤️ by API Test Forge</p>
+            <p class="footer-links">
+                <a href="https://github.com" target="_blank">⭐ GitHub</a>
+                <span class="separator">•</span>
+                <a href="https://twitter.com" target="_blank">🐦 Twitter</a>
+                <span class="separator">•</span>
+                <a href="feedback.html">✉️ Feedback</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+    // small dark mode init to match pages
+    (function(){
+      const toggle = document.getElementById('darkModeToggle');
+      if(!toggle) return;
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') { document.body.classList.add('dark-mode'); toggle.textContent = '☀️'; }
+      toggle.addEventListener('click', ()=>{ document.body.classList.toggle('dark-mode'); const isDark = document.body.classList.contains('dark-mode'); toggle.textContent = isDark ? '☀️' : '🌙'; localStorage.setItem('theme', isDark ? 'dark' : 'light'); });
+    })();
+    </script>
+
+</body>
+</html>
