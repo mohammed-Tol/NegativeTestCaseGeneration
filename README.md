@@ -1,8 +1,8 @@
-# 🔧 API Test Forge
+# 🔧 API / JSON Edge Cases
 
 > A powerful, free online tool for generating edge cases and documenting test scenarios for JSON APIs.
 
-![API Test Forge](https://img.shields.io/badge/version-1.0.0-blue.svg)
+![API / JSON Edge Cases](https://img.shields.io/badge/version-1.0.0-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
 ## ✨ Features

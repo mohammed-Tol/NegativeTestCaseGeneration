@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feedback — API Test Forge</title>
-    <meta name="description" content="Send feedback to the API Test Forge maintainer.">
+    <title>JSON Edge Cases</title>
+    <meta name="description" content="Send feedback to the API / JSON Edge Cases maintainer.">
     <link rel="stylesheet" href="styles.css">
         <!-- Open Graph / Twitter -->
-        <meta property="og:site_name" content="API Test Forge">
-        <meta property="og:title" content="API Test Forge — Feedback">
-        <meta property="og:description" content="Send feedback to the API Test Forge maintainer.">
+        <meta property="og:site_name" content="API / JSON Edge Cases">
+        <meta property="og:title" content="API / JSON Edge Cases — Feedback">
+        <meta property="og:description" content="Send feedback to the API / JSON Edge Cases maintainer.">
         <meta property="og:url" content="https://jsonedgecases.com/feedback.html">
         <meta name="twitter:card" content="summary">
-        <meta name="twitter:title" content="API Test Forge — Feedback">
-        <meta name="twitter:description" content="Send feedback to the API Test Forge maintainer.">
+        <meta name="twitter:title" content="API / JSON Edge Cases — Feedback">
+        <meta name="twitter:description" content="Send feedback to the API / JSON Edge Cases maintainer.">
         <script type="application/ld+json">
         {
             "@context": "https://schema.org",
             "@graph": [
-                { "@type": "WebPage", "@id": "https://jsonedgecases.com/feedback.html#webpage", "url": "https://jsonedgecases.com/feedback.html", "name": "Feedback — API Test Forge", "description": "Send feedback to the API Test Forge maintainer." },
-                { "@type": "Organization", "@id": "https://jsonedgecases.com/#org", "name": "API Test Forge", "url": "https://jsonedgecases.com/", "sameAs": ["https://github.com/mohammed-Tol/NegativeTestCaseGeneration", "https://twitter.com"] }
+                { "@type": "WebPage", "@id": "https://jsonedgecases.com/feedback.html#webpage", "url": "https://jsonedgecases.com/feedback.html", "name": "Feedback — API / JSON Edge Cases", "description": "Send feedback to the API / JSON Edge Cases maintainer." },
+                { "@type": "Organization", "@id": "https://jsonedgecases.com/#org", "name": "API / JSON Edge Cases", "url": "https://jsonedgecases.com/", "sameAs": ["https://github.com/mohammed-Tol", "https://twitter.com"] }
             ]
         }
         </script>
@@ -27,7 +27,7 @@
 <body>
 
     <nav class="navbar">
-        <div class="nav-brand">🔧 API Test Forge</div>
+        <div class="nav-brand">🔧 JSON Edge Cases</div>
         <div class="nav-links">
             <a href="index.html" class="nav-btn">Edge Case Generator</a>
             <a href="custom.html" class="nav-btn">Custom Test Cases</a>
@@ -70,9 +70,9 @@
 
     <footer class="footer">
         <div class="footer-content">
-            <p>Built with ❤️ by API Test Forge</p>
+            <p>Built with ❤️ by API / JSON Edge Cases</p>
             <p class="footer-links">
-                <a href="https://github.com/mohammed-Tol/NegativeTestCaseGeneration" target="_blank">⭐ GitHub</a>
+                <a href="https://github.com/mohammed-Tol" target="_blank">⭐ GitHub</a>
                 <span class="separator">•</span>
                 <a href="feedback.html">✉️ Feedback</a>
             </p>
@@ -87,11 +87,11 @@
         const subject = document.getElementById('fbSubject').value.trim();
         const message = document.getElementById('fbMessage').value.trim();
 
-        const fullSubject = subject || 'Feedback from API Test Forge';
+        const fullSubject = subject || 'Feedback from API / JSON Edge Cases';
         let body = '';
         if (name) body += `Name: ${name}\n\n`;
         body += message;
-        body += '\n\n--\nSent from API Test Forge';
+        body += '\n\n--\nSent from API / JSON Edge Cases';
 
         const mailto = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(fullSubject)}&body=${encodeURIComponent(body)}`;
 
