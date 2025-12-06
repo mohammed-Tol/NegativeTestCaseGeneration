@@ -251,8 +251,14 @@ function extractKeys(obj, prefix = "") {
         const full = prefix ? `${prefix}.${k}` : k;
         keys.push(full);
 
-        if (typeof obj[k] === "object" && obj[k] !== null) {
-            keys = keys.concat(extractKeys(obj[k], full));
+        const val = obj[k];
+        // If it's an array, only consider the first element for key extraction
+        if (Array.isArray(val)) {
+            if (val.length > 0 && typeof val[0] === 'object' && val[0] !== null) {
+                keys = keys.concat(extractKeys(val[0], full));
+            }
+        } else if (typeof val === "object" && val !== null) {
+            keys = keys.concat(extractKeys(val, full));
         }
     }
     return keys;
@@ -325,19 +331,63 @@ function createModifications(val) {
 }
 
 function getAtPath(obj, path) {
-    return path.reduce((o, p) => (o ? o[p] : undefined), obj);
+    return path.reduce((o, p) => {
+        if (o === undefined || o === null) return undefined;
+        // If current value is an array and we're still resolving properties,
+        // use the first element as the representative for nested properties.
+        if (Array.isArray(o)) {
+            // If the path segment refers to the array itself (i.e., last segment), return the array
+            // The reduce will continue only if there are more segments; but here we always need
+            // to access the next property on the first element.
+            o = o[0];
+            if (o === undefined || o === null) return undefined;
+        }
+        return o[p];
+    }, obj);
 }
 
 function setAtPath(obj, path, value) {
     let o = obj;
-    for (let i = 0; i < path.length - 1; i++) o = o[path[i]];
-    o[path[path.length - 1]] = value;
+    for (let i = 0; i < path.length - 1; i++) {
+        const p = path[i];
+        if (o == null) return;
+        let next = o[p];
+        if (Array.isArray(next)) {
+            // Ensure there is a first element to descend into
+            if (next.length === 0) next.push({});
+            o = next[0];
+        } else {
+            o = next;
+        }
+    }
+    const last = path[path.length - 1];
+    if (Array.isArray(o)) {
+        // If parent is an array, set the property on the first element
+        if (o.length === 0) o.push({});
+        o[0][last] = value;
+    } else {
+        o[last] = value;
+    }
 }
 
 function deleteAtPath(obj, path) {
     let o = obj;
-    for (let i = 0; i < path.length - 1; i++) o = o[path[i]];
-    delete o[path[path.length - 1]];
+    for (let i = 0; i < path.length - 1; i++) {
+        const p = path[i];
+        if (o == null) return;
+        const next = o[p];
+        if (Array.isArray(next)) {
+            o = next[0];
+        } else {
+            o = next;
+        }
+    }
+    const last = path[path.length - 1];
+    if (Array.isArray(o)) {
+        if (o.length > 0) delete o[0][last];
+    } else if (o) {
+        delete o[last];
+    }
 }
 
 // Export to JSON
