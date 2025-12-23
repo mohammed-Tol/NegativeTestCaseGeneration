@@ -153,7 +153,7 @@ document.getElementById("generateBtn").addEventListener("click", () => {
         return;
     }
 
-    const cases = generateEdgeCases(json, selectedKey);
+    const {cases, types} = generateEdgeCases(json, selectedKey);
     currentGeneratedCases = cases;
     currentSelectedKey = selectedKey;
 
@@ -177,13 +177,13 @@ document.getElementById("generateBtn").addEventListener("click", () => {
         if (isAlreadyTested) wrapper.classList.add("tested");
 
         const pre = document.createElement("pre");
-        pre.textContent = JSON.stringify(c, null, 2);
+        pre.textContent = `// ${types[index]}\n${JSON.stringify(c, null, 2)}`;
 
         const copyBtn = document.createElement("button");
         copyBtn.textContent = "Copy";
         copyBtn.classList.add("copy-btn-inside");
         copyBtn.addEventListener("click", () => {
-            navigator.clipboard.writeText(pre.textContent).then(() => {
+            navigator.clipboard.writeText(JSON.stringify(c, null, 2)).then(() => {
                 copyBtn.textContent = "Copied!";
                 setTimeout(() => copyBtn.textContent = "Copy", 1500);
             });
@@ -266,6 +266,7 @@ function extractKeys(obj, prefix = "") {
 
 function generateEdgeCases(json, keyPath) {
     const cases = [];
+    const types = [];
     const pathParts = keyPath.split(".");
     const value = getAtPath(json, pathParts);
 
@@ -273,57 +274,65 @@ function generateEdgeCases(json, keyPath) {
 
     mods.forEach(mod => {
         const copy = structuredClone(json);
-        setAtPath(copy, pathParts, mod);
+        setAtPath(copy, pathParts, mod.value);
         cases.push(copy);
+        types.push(mod.type);
     });
 
     const deleted = structuredClone(json);
     deleteAtPath(deleted, pathParts);
     cases.push(deleted);
+    types.push("Missing field");
 
-    return cases;
+    return {cases, types};
 }
 
 function createModifications(val) {
-    let m = [null];
+    let m = [{value: null, type: "Null value"}];
 
     // STRING - comprehensive edge cases
     if (typeof val === "string") {
-        m.push("");                                    // Empty string
-        m.push("Test\nNew\tLine");                     // Special characters
-        m.push("™©®€¥£");                             // Unicode symbols
-        m.push("مرحبا 你好 🎉");                        // Unicode/Emoji
+        m.push({value: "", type: "Empty string"});
+        m.push({value: "Test\nNew\tLine", type: "String with special characters"});
+        m.push({value: "™©®€¥£", type: "Unicode symbols"});
+        m.push({value: "مرحبا 你好 🎉", type: "Unicode/Emoji"});
+        m.push({value: "Control\x00Char", type: "String with null character"});
+        m.push({value: "Tab\tHere", type: "String with tab character"});
+        m.push({value: "Line\nBreak", type: "String with newline character"});
+        m.push({value: "Carriage\rReturn", type: "String with carriage return"});
+        m.push({value: "Form\x0CFeed", type: "String with form feed"});
+        m.push({value: "Backspace\x08Here", type: "String with backspace"});
         return m;
     }
 
     // NUMBER - boundary and type edge cases
     if (typeof val === "number") {
-        m.push(0);
-        m.push(-1);
-        m.push(Number.MAX_SAFE_INTEGER);
+        m.push({value: 0, type: "Zero"});
+        m.push({value: -1, type: "Negative number"});
+        m.push({value: Number.MAX_SAFE_INTEGER, type: "Maximum safe integer"});
         return m;
     }
 
     // BOOLEAN
     if (typeof val === "boolean") {
-        m.push("true");                                // String instead
-        m.push(0);                                     // Number instead
-        m.push("");                                    // Empty string
+        m.push({value: "true", type: "String 'true' instead of boolean"});
+        m.push({value: 0, type: "Number 0 instead of boolean"});
+        m.push({value: "", type: "Empty string instead of boolean"});
         return m;
     }
 
     // ARRAY
     if (Array.isArray(val)) {
-        m.push([]);                                    // Empty array
-        m.push([null]);                                // Array with null
-        m.push([""]);                                  // Array with empty string
-        m.push("not-an-array");                        // Type mismatch
+        m.push({value: [], type: "Empty array"});
+        m.push({value: [null], type: "Array with null element"});
+        m.push({value: [""], type: "Array with empty string"});
+        m.push({value: "not-an-array", type: "String instead of array"});
         return m;
     }
 
     // OBJECT
     if (typeof val === "object" && val !== null) {
-        m.push({});                                    // Empty object
+        m.push({value: {}, type: "Empty object"});
         return m;
     }
 
